@@ -365,6 +365,11 @@ PRODUCT_COPY_FILES += \
 # QMI
 PRODUCT_PACKAGES += \
     libjson
+    
+# QTI
+TARGET_COMMON_QTI_COMPONENTS := \
+    perf \
+    bt
 
 # RCS
 PRODUCT_PACKAGES += \
