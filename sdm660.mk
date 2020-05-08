@@ -23,7 +23,6 @@
 
 # Inherit properties
 $(call inherit-product, $(LOCAL_PATH)/properties.mk)
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -103,7 +102,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio@2.0-impl \
-    audio.bluetooth.default
+    audio.bluetooth.default \
+    libbluetooth_qti
 
 PRODUCT_PACKAGES += \
     libsndmonitor \
@@ -146,9 +146,6 @@ PRODUCT_BOOT_JARS += \
     org.ifaa.android.manager
 
 # Camera
-PRODUCT_PACKAGES += \
-    Snap
-
 PRODUCT_PACKAGES += \
     android.hardware.camera.device@3.4 \
     android.hardware.camera.provider@2.4-impl \
@@ -205,10 +202,6 @@ PRODUCT_PACKAGES += \
     vendor.display.config@1.1 \
     vendor.display.config@1.1_vendor
 
-# Doze
-PRODUCT_PACKAGES += \
-    XiaomiDoze
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
@@ -262,10 +255,6 @@ PRODUCT_COPY_FILES += \
 # Healthd
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0
 
 # IDC
 PRODUCT_COPY_FILES += \
@@ -354,7 +343,8 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service-qti
+    android.hardware.power@1.2-service \
+    android.hardware.power@1.2-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/perf/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf
@@ -400,15 +390,6 @@ PRODUCT_PACKAGES += \
     qti_telephony_hidl_wrapper.xml \
     qti-telephony-utils \
     qti_telephony_utils.xml \
-    telephony-ext
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
-
-# Seccomp policy
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -436,6 +417,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
+
+# vendor qcom/common
+-include vendor/qcom/common/av/qti-av.mk
+-include vendor/qcom/common/perf/qti-perf.mk
 
 # VNDK
 PRODUCT_PACKAGES += \
